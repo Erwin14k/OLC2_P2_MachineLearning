@@ -29,7 +29,11 @@ def linearRegression(options_in_x,options_in_y,data,date):
     print("Error medio: ", mean_squared_error(Y, Y_pred, squared=True))
     print("Coef: ", linear_regression.coef_)
     print("R2: ", r2_score(Y, Y_pred))
-    #st.markdown("### "+Y_pred)
+    
+    st.write(f'{Y_pred}')
+    st.write(f'{mean_squared_error(Y, Y_pred, squared=True)}')
+    st.write(f'{linear_regression.coef_}')
+    st.write(f'{r2_score(Y, Y_pred)}')
     #st.markdown("### Error medio: "+ mean_squared_error(Y, Y_pred, squared=True))
     #st.markdown("### Coef: "+ linear_regression.coef_ )
     #st.markdown("### R2: "+ r2_score(Y, Y_pred))
