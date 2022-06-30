@@ -35,7 +35,7 @@ def linearRegression(options_in_x,options_in_y,data,date):
     plt.scatter(X, Y)
     plt.plot(X, Y_pred, color='red')
     plt.show()
-    Y_new = linear_regression.predict([[(int)date]])
+    Y_new = linear_regression.predict([[(int(date))]])
     print(Y_new)
 
 
