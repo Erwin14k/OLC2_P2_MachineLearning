@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt;
+from sklearn.linear_model import LinearRegression;
+from sklearn.metrics import mean_squared_error, r2_score;
 
 st.set_page_config(
     page_title="OLC2 MACHINE LEARNING", page_icon="📊", initial_sidebar_state="expanded"
@@ -14,6 +17,26 @@ Upload your Dataset.
 )
 
 uploaded_file = st.file_uploader("Upload a document.", type=".csv")
+
+def linearRegression(options_in_x,options_in_y):
+    data = pd.read_csv(uploaded_file)
+    X = np.asarray(data[options_in_x]).reshape(-1, 1)
+    Y = data[options_in_y]
+    linear_regression = LinearRegression()
+    linear_regression.fit(X, Y)
+    Y_pred = linear_regression.predict(X)
+    print(Y_pred)
+    print("Error medio: ", mean_squared_error(Y, Y_pred, squared=True))
+    print("Coef: ", linear_regression.coef_)
+    print("R2: ", r2_score(Y, Y_pred))
+    st.markdown("### Error medio: ", mean_squared_error(Y, Y_pred, squared=True))
+    st.markdown("### Coef: ", linear_regression.coef_ )
+    st.markdown("### R2: ", r2_score(Y, Y_pred))
+    plt.scatter(X, Y)
+    plt.plot(X, Y_pred, color='red')
+    plt.show()
+    Y_new = linear_regression.predict([[2030]])
+    print(Y_new)
 
 
 #Se verifica que si se haya cargado un archivo a la aplicación
@@ -39,12 +62,11 @@ if uploaded_file:
             '¿What attribute will be taken in Y?',parameters_of_y)
         year_of_prediction = st.text_input('Year Of Prediction', 'Ex. 2023')
         if (options_in_x!='None' and options_in_y!='None' and year_of_prediction!='Ex. 2023'):
-            st.markdown("### All done")
+            linearRegression(options_in_x,options_in_y)
             
 
 
-def linearRegression(options_in_x,options_in_y):
-    print()
+
         
         
 
