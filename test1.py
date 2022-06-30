@@ -16,10 +16,10 @@ Upload your Dataset.
 """
 )
 
+
 uploaded_file = st.file_uploader("Upload a document.", type=".csv")
 
-def linearRegression(options_in_x,options_in_y):
-    data = pd.read_csv(uploaded_file)
+def linearRegression(options_in_x,options_in_y,data):
     X = np.asarray(data[options_in_x]).reshape(-1, 1)
     Y = data[options_in_y]
     linear_regression = LinearRegression()
@@ -62,7 +62,7 @@ if uploaded_file:
             '¿What attribute will be taken in Y?',parameters_of_y)
         year_of_prediction = st.text_input('Year Of Prediction', 'Ex. 2023')
         if (options_in_x!='None' and options_in_y!='None' and year_of_prediction!='Ex. 2023'):
-            linearRegression(options_in_x,options_in_y)
+            linearRegression(options_in_x,options_in_y,df)
             
 
 
