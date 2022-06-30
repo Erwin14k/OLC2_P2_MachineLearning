@@ -8,8 +8,8 @@ st.set_page_config(
 
 st.write(
     """
-# 📊 A/B Testing App
-Upload your experiment results to see the significance of your A/B test.
+# 📊 OLC2 MACHINE LEARNING
+Upload your Dataset.
 """
 )
 
@@ -20,8 +20,7 @@ result_default = None
 
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
-    st.markdown("### Data preview")
-    #st.dataframe(df.head())
+    st.markdown("### Dataset preview")
     st.write(df)
 
     
