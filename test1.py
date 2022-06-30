@@ -26,5 +26,7 @@ if uploaded_file:
     '¿What Algorithm do you want to use in the previously loaded data set?',
     ('linear regression', 'polynomial regression', 'Gaussian classifier','Decision tree classifier','neural networks'))
     st.write('You selected:', option)
+    if(option=='linear regression'):
+        st.write('holaaaaaaaa')
 
     
