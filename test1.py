@@ -20,15 +20,8 @@ result_default = None
 
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
-
     st.markdown("### Data preview")
-    st.dataframe(df.head())
+    #st.dataframe(df.head())
+    st.write(df)
 
-    st.markdown("### Select columns for analysis")
-    with st.form(key="my_form"):
-        ab = st.multiselect(
-            "A/B column",
-            options=df.columns,
-            help="Select which column refers to your A/B testing labels.",
-            default=ab_default,
-        )
+    
