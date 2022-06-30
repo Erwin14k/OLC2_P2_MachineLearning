@@ -14,9 +14,7 @@ Upload your Dataset.
 )
 
 uploaded_file = st.file_uploader("Upload a document.", type=".csv")
-option = st.selectbox(
-    '¿What Algorithm do you want to use in the previously loaded data set?',
-    ('linear regression', 'polynomial regression', 'Gaussian classifier','Decision tree classifier','neural networks'))
+
 
 #Se verifica que si se haya cargado un archivo a la aplicación
 if uploaded_file:
