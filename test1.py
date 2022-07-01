@@ -32,6 +32,7 @@ def linearRegression(options_in_x,options_in_y,data,date):
     st.write(f'R2: {r2_score(Y, Y_pred)}')
     Y_new = linear_regression.predict([[(int(date))]])
     st.write(f'Result: {Y_new}')
+    # =========================== Graphs ===========================================
     st.markdown("### Dot Plot - Sparse Data")
     plt.scatter(X, Y)
     plt.savefig("linealDots.png")
@@ -45,6 +46,7 @@ def linearRegression(options_in_x,options_in_y,data,date):
     plt.close()
     image = Image.open('trend.png')
     st.image(image, caption='Trend Plot')
+    # ================================================================================
 
 
 def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
@@ -66,14 +68,23 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     x_new = x_new[:, np.newaxis]
     x_trans = pf.fit_transform(x_new)
     st.write(f'Result: {regr.predict(x_trans)}')
-    #Graficación
+    # =========================== Graphs ===========================================
+    st.markdown("### Dot Plot - Sparse Data")
+    plt.scatter(X, Y, color='green')
+    plt.savefig("polynomialDots.png")
+    plt.close()
+    image = Image.open('polynomialDots.png')
+    st.image(image, caption=f'Dot Plot - Sparse Data - Degree: {degree_datum}')
+    st.markdown("### Trend Plot")
     plt.scatter(X, Y, color='green')
     plt.plot(X, y_pred, color='blue')
-    #plt.show()
-    plt.savefig("polynomial.png")
+    plt.savefig("trendPoly.png")
     plt.close()
-    image = Image.open('polynomial.png')
-    st.image(image, caption=f'Polynomial Regreesion Degree: {degree_datum}')
+    image2 = Image.open('trendPoly.png')
+    st.image(image2, caption=f'Trend Plot - Degree: {degree_datum}')
+    # ================================================================================
+    
+    
 
 
 #Se verifica que si se haya cargado un archivo a la aplicación
