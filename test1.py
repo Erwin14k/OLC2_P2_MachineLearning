@@ -26,14 +26,8 @@ def linearRegression(options_in_x,options_in_y,data,date):
     linear_regression = LinearRegression()
     linear_regression.fit(X, Y)
     Y_pred = linear_regression.predict(X)
-    #print(Y_pred)
-    #print("Error medio: ", mean_squared_error(Y, Y_pred, squared=True))
-    #print("Coef: ", linear_regression.coef_)
-    #print("R2: ", r2_score(Y, Y_pred))
-    
-    #st.write(f'{Y_pred} sss')
-    st.write(f'Error medio: {mean_squared_error(Y, Y_pred, squared=True)}')
-    st.write(f'Coef: {linear_regression.coef_}' )
+    st.write(f'Mean Error: {mean_squared_error(Y, Y_pred, squared=True)}')
+    st.write(f'Regression Coefficient: {linear_regression.coef_}' )
     st.write(f'R2: {r2_score(Y, Y_pred)}')
     plt.scatter(X, Y)
     plt.plot(X, Y_pred, color='red')
@@ -44,7 +38,6 @@ def linearRegression(options_in_x,options_in_y,data,date):
     plt.close()
     image = Image.open('aa.png')
     st.image(image, caption='Linear Regression')
-    #print(Y_new)
 
 
 #Se verifica que si se haya cargado un archivo a la aplicación
