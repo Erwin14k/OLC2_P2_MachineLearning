@@ -1,9 +1,10 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt;
-from sklearn.linear_model import LinearRegression;
-from sklearn.metrics import mean_squared_error, r2_score;
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+from PIL import Image
 
 st.set_page_config(
     page_title="OLC2 MACHINE LEARNING", page_icon="📊", initial_sidebar_state="expanded"
@@ -34,15 +35,16 @@ def linearRegression(options_in_x,options_in_y,data,date):
     st.write(f'Error medio: {mean_squared_error(Y, Y_pred, squared=True)}')
     st.write(f'Coef: {linear_regression.coef_}' )
     st.write(f'R2: {r2_score(Y, Y_pred)}')
-    #st.markdown("### Error medio: "+ mean_squared_error(Y, Y_pred, squared=True))
-    #st.markdown("### Coef: "+ linear_regression.coef_ )
-    #st.markdown("### R2: "+ r2_score(Y, Y_pred))
     plt.scatter(X, Y)
     plt.plot(X, Y_pred, color='red')
     plt.show()
     Y_new = linear_regression.predict([[(int(date))]])
     st.write(f'Result: {Y_new}')
-    print(Y_new)
+    plt.savefig("aa.png")
+    plt.close()
+    image = Image.open('aa.png')
+    st.image(image, caption='Linear Regression')
+    #print(Y_new)
 
 
 #Se verifica que si se haya cargado un archivo a la aplicación
