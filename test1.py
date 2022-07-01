@@ -58,7 +58,7 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     x_new = np.linspace(x_new_min, x_new_max, 1)
     x_new = x_new[:, np.newaxis]
     x_trans = pf.fit_transform(x_new)
-    st.write(f'Result: {x_trans}')
+    st.write(f'Result: {regr.predict(x_trans)}')
     #Graficación
     plt.scatter(X, Y, color='green')
     plt.plot(X, y_pred, color='blue')
