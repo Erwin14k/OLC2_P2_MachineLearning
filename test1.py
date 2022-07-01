@@ -25,10 +25,10 @@ def linearRegression(options_in_x,options_in_y,data,date):
     linear_regression = LinearRegression()
     linear_regression.fit(X, Y)
     Y_pred = linear_regression.predict(X)
-    print(Y_pred)
-    print("Error medio: ", mean_squared_error(Y, Y_pred, squared=True))
-    print("Coef: ", linear_regression.coef_)
-    print("R2: ", r2_score(Y, Y_pred))
+    #print(Y_pred)
+    #print("Error medio: ", mean_squared_error(Y, Y_pred, squared=True))
+    #print("Coef: ", linear_regression.coef_)
+    #print("R2: ", r2_score(Y, Y_pred))
     
     st.write(f'{Y_pred} sss')
     st.write(f'{mean_squared_error(Y, Y_pred, squared=True)} fff')
@@ -41,6 +41,7 @@ def linearRegression(options_in_x,options_in_y,data,date):
     plt.plot(X, Y_pred, color='red')
     plt.show()
     Y_new = linear_regression.predict([[(int(date))]])
+    st.write(f'{Y_new} sss')
     print(Y_new)
 
 
