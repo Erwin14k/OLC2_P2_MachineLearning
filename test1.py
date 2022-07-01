@@ -1,3 +1,4 @@
+from turtle import up
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -71,6 +72,8 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
 
 #Se verifica que si se haya cargado un archivo a la aplicación
 if uploaded_file:
+    st.write(uploaded_file)
+    st.write(uploaded_file.__dir__)
     df = pd.read_csv(uploaded_file)
     st.markdown("### Dataset preview")
     st.write(df)
