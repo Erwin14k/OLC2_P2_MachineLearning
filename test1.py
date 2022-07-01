@@ -30,20 +30,28 @@ def linearRegression(options_in_x,options_in_y,data,date):
     st.write(f'Mean Error: {mean_squared_error(Y, Y_pred, squared=True)}')
     st.write(f'Regression Coefficient: {linear_regression.coef_}' )
     st.write(f'R2: {r2_score(Y, Y_pred)}')
+    Y_new = linear_regression.predict([[(int(date))]])
+    st.write(f'Result: {Y_new}')
     plt.scatter(X, Y)
     plt.savefig("linealDots.png")
     plt.close()
     image2 = Image.open('linealDots.png')
     st.image(image2, caption='Linear Regression')
     plt.scatter(X, Y)
-    plt.plot(X, Y_pred, color='red')
-    #plt.show()
-    Y_new = linear_regression.predict([[(int(date))]])
-    st.write(f'Result: {Y_new}')
     plt.savefig("lineal.png")
     plt.close()
     image = Image.open('lineal.png')
     st.image(image, caption='Linear Regression')
+
+    plt.scatter(X, Y, color='green')
+    plt.plot(X, Y_new, color='blue')
+
+    plt.savefig('tendencia.png')
+    st.image('tendencia.png', use_column_width=True)
+
+    plt.xlabel(X)
+    plt.ylabel(Y)
+    plt.close()
 
 def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     X = np.asarray(data[options_in_x]).reshape(-1, 1)
