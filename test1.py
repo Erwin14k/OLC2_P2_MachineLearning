@@ -90,7 +90,7 @@ def decisionTreeClassifier(all_data,data_to_analyze):
     all_features=[]
     analyze = np.asarray(all_data[data_to_analyze]).reshape(-1, 1)
     #all_features.append(analyze)
-    all=np.asarray(all_data)
+    all=np.array_str(all_data)
     all_features.append(all)
     features = list(zip(all_features))
     clf = DecisionTreeClassifier().fit(features, analyze)
