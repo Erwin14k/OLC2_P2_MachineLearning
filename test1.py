@@ -36,9 +36,14 @@ def linearRegression(options_in_x,options_in_y,data,date):
     st.write(f'Result: {Y_new}')
     st.markdown("### Trend Prediction")
     st.write(Y_pred)
-    #co1=linear_regression.coef_.to
+    coeficient=np.array2string(linear_regression.coef_)
+    coeficient=coeficient.replace("[","")
+    coeficient=coeficient.replace("]","")
+    intercept=np.array2string(linear_regression.intercept_)
+    intercept=intercept.replace("[","")
+    intercept=intercept.replace("]","")
     st.markdown("### Trend Function")
-    st.write(f'y= {np.array2string(linear_regression.coef_)}X + {date}')
+    st.write(f'y= {coeficient}X + {intercept}')
     # =========================== Graphs ===========================================
     st.markdown("### Dot Plot - Sparse Data")
     plt.scatter(X, Y)
