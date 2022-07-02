@@ -14,12 +14,12 @@ st.set_page_config(
 st.write(
     """
 # 📊 OLC2 MACHINE LEARNING
-Upload your Dataset.
+Erwin14k.
 """
 )
 
 
-uploaded_file = st.file_uploader("Upload a document.", type={".csv",".json",".xls",".xlsx"})
+uploaded_file = st.file_uploader("Upload your Dataset.", type={".csv",".json",".xls",".xlsx"})
 
 def linearRegression(options_in_x,options_in_y,data,date):
     X = np.asarray(data[options_in_x]).reshape(-1, 1)
@@ -83,13 +83,16 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     image2 = Image.open('trendPoly.png')
     st.image(image2, caption=f'Trend Plot - Degree: {degree_datum}')
     # ================================================================================
+
+
+def gaussianClassifier(options_in_x,options_in_y,data,date):
+    print()
     
     
 
 
 #Se verifica que si se haya cargado un archivo a la aplicación
 if uploaded_file:
-    st.write(uploaded_file.type)
     if uploaded_file.type.find("csv") != -1:
         df = pd.read_csv(uploaded_file)
         st.markdown("### Dataset preview")
