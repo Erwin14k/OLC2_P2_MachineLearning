@@ -37,7 +37,7 @@ def linearRegression(options_in_x,options_in_y,data,date):
     st.markdown("### Trend Prediction")
     st.write(Y_pred)
     st.markdown("### Trend Function")
-    st.write(f'y= {linear_regression.coef_.var}X + {date}')
+    st.write(f'y= {linear_regression.coef_.reshape(-1,1)}X + {date}')
     # =========================== Graphs ===========================================
     st.markdown("### Dot Plot - Sparse Data")
     plt.scatter(X, Y)
