@@ -6,6 +6,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures;
 from sklearn.metrics import mean_squared_error, r2_score
 from PIL import Image
+from sklearn.tree import DecisionTreeClassifier, plot_tree
 
 st.set_page_config(
     page_title="OLC2 MACHINE LEARNING", page_icon="📊", initial_sidebar_state="expanded"
@@ -85,8 +86,21 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     # ================================================================================
 
 
-def gaussianClassifier(options_in_x,options_in_y,data,date):
-    print()
+def decisionTreeClassifier(all_data,data_to_analyze):
+    all_features=[]
+    analyze = np.asarray(all_data[data_to_analyze]).reshape(-1, 1)
+    #all_features.append(analyze)
+    all=np.asarray(all_data)
+    all_features.append(all)
+    features = list(zip(all_features))
+    clf = DecisionTreeClassifier().fit(features, analyze)
+    plot_tree(clf, filled=True)
+    plt.savefig("tree.png")
+    plt.close()
+    image2 = Image.open('tree.png')
+    st.markdown("### Decision Tree Classifier")
+    st.image(image2, caption=f'Decision Tree Classifier')
+
     
     
 
@@ -129,6 +143,15 @@ if uploaded_file:
             year_of_prediction = st.text_input('Year Of Prediction', 'Ex. 2023')
             if (options_in_x!='None' and options_in_y!='None' and year_of_prediction!='Ex. 2023' and degree_of_prediction!='Ex. 2'):
                 polinomialRegression(degree_of_prediction,options_in_x,options_in_y,df,year_of_prediction)
+        elif(option=='Decision tree classifier'):
+            st.markdown("### Decision Tree Classifier")
+            for column_name in keys.columns:
+                parameters_of_x.append(column_name)
+                parameters_of_y.append(column_name)
+            options_in_x = st.selectbox(
+                '¿What attribute will be taken in to analyze?',parameters_of_x)
+            if (options_in_x!='None'):
+                decisionTreeClassifier(df,options_in_x)
     if uploaded_file.type.find("json") != -1:
         df = pd.read_json(uploaded_file)
         st.markdown("### Dataset preview")
