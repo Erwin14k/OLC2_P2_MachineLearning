@@ -97,6 +97,7 @@ def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values):
             all_features.append(temp2)
     features = list(zip(all_features.split(",")))
     testing=le.fit_transform(test_values)
+    st.write(features)
     clf = DecisionTreeClassifier().fit(features, testing)
     plot_tree(clf, filled=True)
     plt.savefig("tree.png")
