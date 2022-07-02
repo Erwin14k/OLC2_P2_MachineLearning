@@ -86,14 +86,12 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     # ================================================================================
 
 
-def decisionTreeClassifier(all_data,data_to_analyze):
+def decisionTreeClassifier(all_data,data_to_analyze,columns):
     all_features=[]
-    analyze = np.asarray(all_data[data_to_analyze]).reshape(-1, 1)
-    #all_features.append(analyze)
-    all=np.array_str(all_data)
-    all_features.append(all)
+    for column in columns:
+        all_features.append(all_data[column].tolist())
     features = list(zip(all_features))
-    clf = DecisionTreeClassifier().fit(features, analyze)
+    clf = DecisionTreeClassifier().fit(features, all_data[data_to_analyze].tolist())
     plot_tree(clf, filled=True)
     plt.savefig("tree.png")
     plt.close()
@@ -151,7 +149,7 @@ if uploaded_file:
             options_in_x = st.selectbox(
                 '¿What attribute will be taken in to analyze?',parameters_of_x)
             if (options_in_x!='None'):
-                decisionTreeClassifier(df,options_in_x)
+                decisionTreeClassifier(df,options_in_x,keys.columns)
     if uploaded_file.type.find("json") != -1:
         df = pd.read_json(uploaded_file)
         st.markdown("### Dataset preview")
