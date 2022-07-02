@@ -7,6 +7,7 @@ from sklearn.preprocessing import PolynomialFeatures;
 from sklearn.metrics import mean_squared_error, r2_score
 from PIL import Image
 from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn import preprocessing
 
 st.set_page_config(
     page_title="OLC2 MACHINE LEARNING", page_icon="📊", initial_sidebar_state="expanded"
@@ -88,11 +89,15 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
 
 def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values):
     all_features=[]
+    le=preprocessing.LabelEncoder()
     for column in columns:
         if column!=data_to_analyze:
-            all_features.append(all_data[column].tolist())
+            temp=all_data[column].tolist()
+            temp2=le.fit_transform(temp)
+            all_features.append(temp2)
     features = list(zip(all_features))
-    clf = DecisionTreeClassifier().fit(features, test_values)
+    testing=le.fit_transform(test_values)
+    clf = DecisionTreeClassifier().fit(features, testing)
     plot_tree(clf, filled=True)
     plt.savefig("tree.png")
     plt.close()
