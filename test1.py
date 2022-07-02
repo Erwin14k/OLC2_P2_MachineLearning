@@ -34,6 +34,10 @@ def linearRegression(options_in_x,options_in_y,data,date):
     st.write(f'R2: {r2_score(Y, Y_pred)}')
     Y_new = linear_regression.predict([[(int(date))]])
     st.write(f'Result: {Y_new}')
+    st.markdown("### Trend Prediction")
+    st.write(Y_pred)
+    st.markdown("### Trend Function")
+    st.write(f'y= {linear_regression.coef_.var}X + {date}')
     # =========================== Graphs ===========================================
     st.markdown("### Dot Plot - Sparse Data")
     plt.scatter(X, Y)
@@ -63,6 +67,8 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     r2 = r2_score(Y, y_pred)
     st.write(f'RMSE: {rmse}')
     st.write(f'R^2: {r2}')
+    st.markdown("### Trend Prediction")
+    st.write(y_pred)
     pred = int(date)
     x_new_min = pred
     x_new_max = pred
