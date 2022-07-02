@@ -96,7 +96,8 @@ def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values):
             st.write(temp)
             temp2=le.fit_transform(temp)
             all_features.append(temp2)
-    features = list(zip(all_features))
+    
+    features = list(zip(np.array_split(all_features) ))
     testing=le.fit_transform(test_values)
     st.write("features")
     st.write(features)
