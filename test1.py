@@ -137,7 +137,7 @@ def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_va
     testing=le.fit_transform(test_values)
     model=GaussianNB()
     model.fit(features, testing)
-    predicted=model.predict([predicted_values])
+    predicted=model.predict(predicted_values)
     st.write(f'Predicted Value: {predicted}')
     
 
