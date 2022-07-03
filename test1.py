@@ -138,9 +138,11 @@ def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_va
     model=GaussianNB()
     model.fit(features, testing)
     final_values=[]
+    
     final_values.append(predicted_values)
-    predicted=model.predict(final_values)
-    st.write(f'Predicted Value: {predicted}')
+    st.write(final_values)
+    #predicted=model.predict(final_values)
+    #st.write(f'Predicted Value: {predicted}')
     
 
     
