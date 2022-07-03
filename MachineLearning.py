@@ -83,14 +83,14 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     equation_result="y="
     for temp in np.flip(regr.coef_):
         if(counter>1):
-            if(temp.find("-")!=-1):
+            if(str(temp).find("-")!=-1):
                 equation_result+=f'{temp}$X^{counter}$ '
                 counter=counter-1
             else:
                 equation_result+=f'+{temp}$X^{counter}$ '
                 counter=counter-1
         elif(counter==1):
-            if(temp.find("-")!=-1):
+            if(str(temp).find("-")!=-1):
                 equation_result+=f'{temp}$X$ '
                 counter=counter-1
             else:
