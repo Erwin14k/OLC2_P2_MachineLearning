@@ -82,8 +82,24 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     counter=int(degree_datum)
     equation_result="y="
     for temp in np.flip(regr.coef_):
-        equation_result+=f'+{temp}$X^{counter}$ '
-        counter=counter-1
+        if(counter>1):
+            if(temp.find("-")!=-1):
+                equation_result+=f'{temp}$X^{counter}$ '
+                counter=counter-1
+            else:
+                equation_result+=f'+{temp}$X^{counter}$ '
+                counter=counter-1
+        elif(counter==1):
+            if(temp.find("-")!=-1):
+                equation_result+=f'{temp}$X$ '
+                counter=counter-1
+            else:
+                equation_result+=f'+{temp}$X$ '
+                counter=counter-1
+    intercept=np.array2string(regr.intercept_)
+    intercept=intercept.replace("[","")
+    intercept=intercept.replace("]","")
+
     y_pred = regr.predict(x_trans)
     rmse = np.sqrt(mean_squared_error(Y, y_pred))
     r2 = r2_score(Y, y_pred)
