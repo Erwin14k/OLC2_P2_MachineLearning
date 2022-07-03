@@ -141,7 +141,7 @@ def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_va
     final_values=[]
     final_values.append(predicted_values)
     #st.write(final_values)
-    predicted=model.predict([[predicted_values]])
+    predicted=model.predict([[final_values]])
     st.write(f'Predicted Value: {predicted}')
     
 
@@ -197,6 +197,9 @@ if uploaded_file:
             values = st.text_input('Write the predicted values separated by commas.', 'Ex. 2,4,5')
             if (options_in_x!='None' and values !='Ex. 2,4,5'):
                 test_values=df[options_in_x].tolist()
+                values=values.split(",")
+                for temp in values:
+                    temp=int(temp)
                 gaussianClasiffier(df,options_in_x,keys.columns,test_values,values)
         elif(option=='Decision tree classifier'):
             st.markdown("### Decision Tree Classifier")
