@@ -144,6 +144,7 @@ def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_va
         temp_list.append(int(temp))
     final_values.append(temp_list)
     #st.write(final_values)
+    predicted=np.array2string(predicted)
     predicted=model.predict(final_values)
     predicted=predicted.replace("[","")
     predicted=predicted.replace("]","")
