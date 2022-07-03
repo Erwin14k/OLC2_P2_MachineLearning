@@ -7,6 +7,7 @@ from sklearn.preprocessing import PolynomialFeatures;
 from sklearn.metrics import mean_squared_error, r2_score
 from PIL import Image
 from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.naive_bayes import GaussianNB;
 from sklearn import preprocessing
 
 st.set_page_config(
@@ -110,14 +111,11 @@ def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values):
     for column in columns:
         if column!=data_to_analyze and column.upper() !="NO":
             temp=all_data[column].tolist()
-            #st.write(temp)
             temp2=le.fit_transform(temp)
             all_features.append(temp2)
     
     features = list(zip(*all_features) )
     testing=le.fit_transform(test_values)
-    #st.write("features")
-    #st.write(features)
     clf = DecisionTreeClassifier().fit(features, testing)
     plot_tree(clf, filled=True)
     plt.savefig("tree.png")
@@ -125,6 +123,23 @@ def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values):
     image2 = Image.open('tree.png')
     st.markdown("### Decision Tree Classifier")
     st.image(image2, caption=f'Decision Tree Classifier')
+
+def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_values):
+    all_features=[]
+    le=preprocessing.LabelEncoder()
+    for column in columns:
+        if column!=data_to_analyze and column.upper() !="NO":
+            temp=all_data[column].tolist()
+            temp2=le.fit_transform(temp)
+            all_features.append(temp2)
+    
+    features = list(zip(*all_features) )
+    testing=le.fit_transform(test_values)
+    model=GaussianNB()
+    model.fit(features, testing)
+    predicted=model.predict([predicted_values])
+    st.write(f'Predicted Value: {predicted}')
+    
 
     
     
@@ -168,6 +183,17 @@ if uploaded_file:
             year_of_prediction = st.text_input('Year Of Prediction', 'Ex. 2023')
             if (options_in_x!='None' and options_in_y!='None' and year_of_prediction!='Ex. 2023' and degree_of_prediction!='Ex. 2'):
                 polinomialRegression(degree_of_prediction,options_in_x,options_in_y,df,year_of_prediction)
+        elif(option=='Gaussian classifier'):
+            st.markdown("### Gaussian classifier")
+            for column_name in keys.columns:
+                parameters_of_x.append(column_name)
+                parameters_of_y.append(column_name)
+            options_in_x = st.selectbox(
+                '¿What attribute will be taken in to analyze?',parameters_of_x)
+            values = st.text_input('Write the predicted values separated by commas.', 'Ex. 2,4,5')
+            if (options_in_x!='None' and values !='Ex. 2,4,5'):
+                test_values=df[options_in_x].tolist()
+                decisionTreeClassifier(df,options_in_x,keys.columns,test_values,values.split(","))
         elif(option=='Decision tree classifier'):
             st.markdown("### Decision Tree Classifier")
             for column_name in keys.columns:
@@ -175,7 +201,7 @@ if uploaded_file:
                 parameters_of_y.append(column_name)
             options_in_x = st.selectbox(
                 '¿What attribute will be taken in to analyze?',parameters_of_x)
-            if (options_in_x!='None'):
+            if (options_in_x!='None' ):
                 test_values=df[options_in_x].tolist()
                 decisionTreeClassifier(df,options_in_x,keys.columns,test_values)
     if uploaded_file.type.find("json") != -1:
