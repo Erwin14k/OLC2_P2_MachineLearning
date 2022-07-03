@@ -53,7 +53,7 @@ def linearRegression(options_in_x,options_in_y,data,date):
     intercept=intercept.replace("[","")
     intercept=intercept.replace("]","")
     st.markdown("### Trend Function")
-    if(intercept.find("-"!=-1)):
+    if(intercept.find("-")!=-1):
         st.write(f'y= {coeficient}X {intercept}')
     else:
         st.write(f'y= {coeficient}X + {intercept}')
