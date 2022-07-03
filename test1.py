@@ -17,7 +17,7 @@ st.set_page_config(
 st.write(
     """
 # 📊 OLC2 MACHINE LEARNING
-Erwin14k.
+I'm Erwin Vásquez - aka Erwin14k 👋
 """
 )
 
@@ -104,26 +104,6 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     st.image(image2, caption=f'Trend Plot - Degree: {degree_datum}')
     # ================================================================================
 
-
-def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values):
-    all_features=[]
-    le=preprocessing.LabelEncoder()
-    for column in columns:
-        if column!=data_to_analyze and column.upper() !="NO":
-            temp=all_data[column].tolist()
-            temp2=le.fit_transform(temp)
-            all_features.append(temp2)
-    
-    features = list(zip(*all_features) )
-    testing=le.fit_transform(test_values)
-    clf = DecisionTreeClassifier().fit(features, testing)
-    plot_tree(clf, filled=True)
-    plt.savefig("tree.png")
-    plt.close()
-    image2 = Image.open('tree.png')
-    st.markdown("### Decision Tree Classifier")
-    st.image(image2, caption=f'Decision Tree Classifier')
-
 def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_values):
     all_features=[]
     le=preprocessing.LabelEncoder()
@@ -149,20 +129,43 @@ def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_va
     predicted=predicted.replace("[","")
     predicted=predicted.replace("]","")
     st.write(f'Predicted Value: {predicted}')
+
+def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values):
+    all_features=[]
+    le=preprocessing.LabelEncoder()
+    for column in columns:
+        if column!=data_to_analyze and column.upper() !="NO":
+            temp=all_data[column].tolist()
+            temp2=le.fit_transform(temp)
+            all_features.append(temp2)
+    
+    features = list(zip(*all_features) )
+    testing=le.fit_transform(test_values)
+    clf = DecisionTreeClassifier().fit(features, testing)
+    # =========================== Graphs ===========================================
+    plot_tree(clf, filled=True)
+    plt.savefig("tree.png")
+    plt.close()
+    image2 = Image.open('tree.png')
+    st.markdown("### Decision Tree Classifier")
+    st.image(image2, caption=f'Decision Tree Classifier')
+    # ================================================================================
+
+
     
 
     
     
 
 
-#Se verifica que si se haya cargado un archivo a la aplicación
+#It is verified that if a file has been uploaded to the application
 if uploaded_file:
     if uploaded_file.type.find("csv") != -1:
         df = pd.read_csv(uploaded_file)
         st.markdown("### Dataset preview")
         st.write(df)
         keys=df.head()
-        #Se hace visible un selectBox con todos los algoritmos disponibles a realizar
+        #A selectBox is made visible with all the available algorithms to perform
         option = st.selectbox(
             '¿What Algorithm do you want to use in the previously loaded data set?',
             ('None','linear regression', 'polynomial regression', 'Gaussian classifier','Decision tree classifier','neural networks'))
@@ -222,7 +225,7 @@ if uploaded_file:
         st.markdown("### Dataset preview")
         st.write(df)
         keys=df.head()
-        #Se hace visible un selectBox con todos los algoritmos disponibles a realizar
+        #A selectBox is made visible with all the available algorithms to perform
         option = st.selectbox(
             '¿What Algorithm do you want to use in the previously loaded data set?',
             ('None','linear regression', 'polynomial regression', 'Gaussian classifier','Decision tree classifier','neural networks'))
@@ -258,7 +261,7 @@ if uploaded_file:
         st.markdown("### Dataset preview")
         st.write(df)
         keys=df.head()
-        #Se hace visible un selectBox con todos los algoritmos disponibles a realizar
+        #A selectBox is made visible with all the available algorithms to perform
         option = st.selectbox(
             '¿What Algorithm do you want to use in the previously loaded data set?',
             ('None','linear regression', 'polynomial regression', 'Gaussian classifier','Decision tree classifier','neural networks'))
