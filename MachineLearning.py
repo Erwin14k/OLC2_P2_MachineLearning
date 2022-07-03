@@ -1,3 +1,5 @@
+#============================IMPORTS====================================
+#=======================================================================
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -9,6 +11,8 @@ from PIL import Image
 from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.naive_bayes import GaussianNB;
 from sklearn import preprocessing
+#=======================================================================
+#=======================================================================
 
 st.set_page_config(
     page_title="OLC2 MACHINE LEARNING", page_icon="📊", initial_sidebar_state="expanded"
@@ -74,6 +78,7 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     x_trans = pf.fit_transform(X)
     regr = LinearRegression()
     regr.fit(x_trans, Y)
+    st.write(regr.coef_)
     y_pred = regr.predict(x_trans)
     rmse = np.sqrt(mean_squared_error(Y, y_pred))
     r2 = r2_score(Y, y_pred)
