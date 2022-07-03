@@ -54,9 +54,9 @@ def linearRegression(options_in_x,options_in_y,data,date):
     intercept=intercept.replace("]","")
     st.markdown("### Trend Function")
     if(intercept.find("-")!=-1):
-        st.write(f'y= {coeficient}X {intercept}')
+        st.write(f'y= {coeficient}$X$ {intercept}')
     else:
-        st.write(f'y= {coeficient}X + {intercept}')
+        st.write(f'y= {coeficient}$X$ + {intercept}')
 
     
     # =========================== Graphs ===========================================
