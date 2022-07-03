@@ -99,6 +99,10 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     intercept=np.array2string(regr.intercept_)
     intercept=intercept.replace("[","")
     intercept=intercept.replace("]","")
+    if(intercept.find("-")!=-1):
+        equation_result+=f'{intercept}'
+    else:
+        equation_result+=f'+{intercept}'
 
     y_pred = regr.predict(x_trans)
     rmse = np.sqrt(mean_squared_error(Y, y_pred))
