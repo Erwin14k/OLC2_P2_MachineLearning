@@ -83,6 +83,7 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     equation_result="y="
     for temp in np.flip(regr.coef_):
         equation_result+=f'+{temp}$X^{counter}$ '
+        counter=counter-1
     y_pred = regr.predict(x_trans)
     rmse = np.sqrt(mean_squared_error(Y, y_pred))
     r2 = r2_score(Y, y_pred)
@@ -91,7 +92,7 @@ def polinomialRegression(degree_datum,options_in_x,options_in_y,data,date):
     st.markdown("### Trend Prediction")
     st.write(y_pred)
     st.markdown("### Trend Function")
-    st.write(f'y= {equation_result}')
+    st.write(f'{equation_result}')
     pred = int(date)
     x_new_min = pred
     x_new_max = pred
