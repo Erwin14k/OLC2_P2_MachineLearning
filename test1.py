@@ -127,6 +127,7 @@ def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values):
 def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_values):
     all_features=[]
     le=preprocessing.LabelEncoder()
+    model=GaussianNB()
     for column in columns:
         if column!=data_to_analyze and column.upper() !="NO":
             temp=all_data[column].tolist()
@@ -135,14 +136,13 @@ def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_va
     
     features = list(zip(*all_features) )
     testing=le.fit_transform(test_values)
-    model=GaussianNB()
+    
     model.fit(features, testing)
     final_values=[]
-    
     final_values.append(predicted_values)
-    st.write(final_values)
-    #predicted=model.predict(final_values)
-    #st.write(f'Predicted Value: {predicted}')
+    #st.write(final_values)
+    predicted=model.predict([[predicted_values]])
+    st.write(f'Predicted Value: {predicted}')
     
 
     
@@ -197,7 +197,7 @@ if uploaded_file:
             values = st.text_input('Write the predicted values separated by commas.', 'Ex. 2,4,5')
             if (options_in_x!='None' and values !='Ex. 2,4,5'):
                 test_values=df[options_in_x].tolist()
-                gaussianClasiffier(df,options_in_x,keys.columns,test_values,values.split(","))
+                gaussianClasiffier(df,options_in_x,keys.columns,test_values,values)
         elif(option=='Decision tree classifier'):
             st.markdown("### Decision Tree Classifier")
             for column_name in keys.columns:
