@@ -218,7 +218,7 @@ def neuralNetworks(all_data,data_to_analyze,columns,test_values,predicted_values
     features = list(zip(*all_features) )
     testing=le.fit_transform(test_values)
     #x_train,x_test,y_train=train_test_split(all_features,testing)
-    mlp=MLPClassifier(hidden_layer_sizes=(100,100,100),max_iter=1000, alpha=0.0001,solver='adam',random_state=21,tol=0.0000000001)
+    mlp=MLPClassifier(hidden_layer_sizes=(10,10,10),max_iter=1000, alpha=0.0001,solver='adam',random_state=21,tol=0.0000000001)
     mlp.fit(features,testing)
     final_values=[]
     temp_list=[]
