@@ -172,9 +172,7 @@ def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_va
     predicted=np.array2string(predicted)
     predicted=predicted.replace("[","")
     predicted=predicted.replace("]","")
-    
-    
-    st.write(f'Predicted Value: {predicted}')
+    st.write(f'Prediction: {predicted}')
 
 def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values,predicted_values):
     all_features=[]
@@ -232,16 +230,8 @@ def neuralNetworks(all_data,data_to_analyze,columns,test_values,predicted_values
     prediction=np.array2string(prediction)
     prediction=prediction.replace("[","")
     prediction=prediction.replace("]","")
-    
-    #st.write(classification_report(y_test,predictions))
-    st.write(prediction)
+    st.write(f'Prediction: {prediction}')
 
-
-
-    
-
-    
-    
 
 
 #It is verified that if a file has been uploaded to the application
