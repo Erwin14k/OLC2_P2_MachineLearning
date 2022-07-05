@@ -162,10 +162,11 @@ def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_va
     final_values.append(temp_list)
     #st.write(final_values)
     predicted=model.predict(final_values)
+    predicted=le.inverse_transform(predicted)
     predicted=np.array2string(predicted)
     predicted=predicted.replace("[","")
     predicted=predicted.replace("]","")
-    predicted=le.inverse_transform(predicted)
+    
     st.write(f'Predicted Value: {predicted}')
 
 def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values,predicted_values):
