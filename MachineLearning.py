@@ -169,9 +169,9 @@ def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_va
     #st.write(final_values)
     predicted=model.predict(final_values)
     predicted=le.inverse_transform(predicted)
-    #predicted=np.array2string(predicted)
-    #predicted=predicted.replace("[","")
-    #predicted=predicted.replace("]","")
+    predicted=np.array2string(predicted)
+    predicted=predicted.replace("[","")
+    predicted=predicted.replace("]","")
     
     
     st.write(f'Predicted Value: {predicted}')
@@ -282,7 +282,7 @@ if uploaded_file:
                 values=values.split(",")
                 le=preprocessing.LabelEncoder()
                 values=le.fit_transform(values)
-                st.write(values)
+                #st.write(values)
                 gaussianClasiffier(df,options_in_x,keys.columns,test_values,values)
         elif(option=='Decision tree classifier'):
             st.markdown("### Decision Tree Classifier")
