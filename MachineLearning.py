@@ -214,7 +214,7 @@ def neuralNetworks(all_data,data_to_analyze,columns,test_values,predicted_values
             all_features.append(temp2)
     features = list(zip(*all_features) )
     testing=le.fit_transform(test_values)
-    x_train,x_test,y_train=train_test_split(features,testing)
+    x_train,x_test,y_train=train_test_split(all_features,testing)
     scaler=StandardScaler()
     scaler.fit(x_train)
     x_train=scaler.transform(x_train)
