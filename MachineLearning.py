@@ -267,6 +267,9 @@ if uploaded_file:
             values = st.text_input('Write the predicted values separated by commas.', 'Ex. 2,4,5')
             if (options_in_x!='None' and values !='Ex. 2,4,5' ):
                 test_values=df[options_in_x].tolist()
+                values=values.split(",")
+                for temp in values:
+                    temp=int(temp)
                 decisionTreeClassifier(df,options_in_x,keys.columns,test_values,values)
         elif(option=='neural networks'):
             st.markdown("### Neural Networks")
