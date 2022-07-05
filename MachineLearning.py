@@ -202,6 +202,9 @@ def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values,predicte
     final_values.append(temp_list)
     prediction=clf.predict(final_values)
     prediction=le.inverse_transform(prediction)
+    prediction=np.array2string(prediction)
+    prediction=prediction.replace("[","")
+    prediction=prediction.replace("]","")
     st.write(f'Prediction: {prediction}')
     # ================================================================================
 
@@ -224,9 +227,14 @@ def neuralNetworks(all_data,data_to_analyze,columns,test_values,predicted_values
     for temp in predicted_values:
         temp_list.append(int(temp))
     final_values.append(temp_list)
-    predictions=mlp.predict(final_values)
+    prediction=mlp.predict(final_values)
+    prediction=le.inverse_transform(prediction)
+    prediction=np.array2string(prediction)
+    prediction=prediction.replace("[","")
+    prediction=prediction.replace("]","")
+    
     #st.write(classification_report(y_test,predictions))
-    st.write(predictions)
+    st.write(prediction)
 
 
 
