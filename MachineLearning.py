@@ -194,6 +194,7 @@ def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values,predicte
         temp_list.append(int(temp))
     final_values.append(temp_list)
     prediction=clf.predict(final_values)
+    prediction=le.inverse_transform(prediction)
     st.write(f'Prediction: {prediction[0]}')
     # ================================================================================
 
@@ -259,8 +260,6 @@ if uploaded_file:
                 values=values.split(",")
                 le=preprocessing.LabelEncoder()
                 values=le.fit_transform(values)
-                #for temp in values:
-                    #temp=int(temp)
                 gaussianClasiffier(df,options_in_x,keys.columns,test_values,values)
         elif(option=='Decision tree classifier'):
             st.markdown("### Decision Tree Classifier")
@@ -273,8 +272,8 @@ if uploaded_file:
             if (options_in_x!='None' and values !='Ex. 2,4,5' ):
                 test_values=df[options_in_x].tolist()
                 values=values.split(",")
-                for temp in values:
-                    temp=int(temp)
+                le=preprocessing.LabelEncoder()
+                values=le.fit_transform(values)
                 decisionTreeClassifier(df,options_in_x,keys.columns,test_values,values)
         elif(option=='neural networks'):
             st.markdown("### Neural Networks")
