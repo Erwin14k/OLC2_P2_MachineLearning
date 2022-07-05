@@ -167,7 +167,7 @@ def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_va
     predicted=predicted.replace("]","")
     st.write(f'Predicted Value: {predicted}')
 
-def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values):
+def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values,predicted_values):
     all_features=[]
     le=preprocessing.LabelEncoder()
     for column in columns:
@@ -186,7 +186,17 @@ def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values):
     image2 = Image.open('tree.png')
     st.markdown("### Decision Tree Classifier")
     st.image(image2, caption=f'Decision Tree Classifier')
+    final_values=[]
+    temp_list=[]
+    for temp in predicted_values:
+        temp_list.append(int(temp))
+    final_values.append(temp_list)
+    st.write(clf.predict([final_values]))
     # ================================================================================
+
+
+def neuralNetworks():
+    print()
 
 
     
@@ -254,9 +264,12 @@ if uploaded_file:
                 parameters_of_y.append(column_name)
             options_in_x = st.selectbox(
                 '¿What attribute will be taken in to analyze?',parameters_of_x)
-            if (options_in_x!='None' ):
+            values = st.text_input('Write the predicted values separated by commas.', 'Ex. 2,4,5')
+            if (options_in_x!='None' and values !='Ex. 2,4,5' ):
                 test_values=df[options_in_x].tolist()
-                decisionTreeClassifier(df,options_in_x,keys.columns,test_values)
+                decisionTreeClassifier(df,options_in_x,keys.columns,test_values,values)
+        elif(option=='neural networks'):
+            st.markdown("### Neural Networks")
     if uploaded_file.type.find("json") != -1:
         df = pd.read_json(uploaded_file)
         st.markdown("### Dataset preview")
