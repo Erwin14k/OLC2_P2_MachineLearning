@@ -211,7 +211,7 @@ def neuralNetworks(all_data,data_to_analyze,columns,test_values,predicted_values
     all_features=[]
     le=preprocessing.LabelEncoder()
     for column in columns:
-        if column!=data_to_analyze:
+        if column!=data_to_analyze and column.upper() !="NO":
             temp=all_data[column].tolist()
             temp2=le.fit_transform(temp)
             all_features.append(temp2)
