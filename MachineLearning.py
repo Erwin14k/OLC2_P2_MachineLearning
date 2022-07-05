@@ -162,22 +162,16 @@ def gaussianClasiffier(all_data,data_to_analyze,columns,test_values,predicted_va
     model.fit(features, testing)
     final_values=[]
     temp_list=[]
-    '''#==============================
-    final_values=[  ]
-    for:
-        temp_list=[4] 
-
-    final_values=[ [3],[4] ]
-    #====================================*'''
+    
     for temp in predicted_values:
         temp_list.append(int(temp))
     final_values.append(temp_list)
     #st.write(final_values)
     predicted=model.predict(final_values)
     predicted=le.inverse_transform(predicted)
-    predicted=np.array2string(predicted)
-    predicted=predicted.replace("[","")
-    predicted=predicted.replace("]","")
+    #predicted=np.array2string(predicted)
+    #predicted=predicted.replace("[","")
+    #predicted=predicted.replace("]","")
     
     
     st.write(f'Predicted Value: {predicted}')
