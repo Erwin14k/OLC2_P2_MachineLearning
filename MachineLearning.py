@@ -195,7 +195,7 @@ def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values,predicte
     final_values.append(temp_list)
     prediction=clf.predict(final_values)
     prediction=le.inverse_transform(prediction)
-    st.write(f'Prediction: {prediction[0]}')
+    st.write(f'Prediction: {prediction}')
     # ================================================================================
 
 
