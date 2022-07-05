@@ -1,5 +1,6 @@
 #============================IMPORTS====================================
 #=======================================================================
+from base64 import standard_b64encode
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -11,6 +12,10 @@ from PIL import Image
 from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.naive_bayes import GaussianNB;
 from sklearn import preprocessing
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import classification_report
 #=======================================================================
 #=======================================================================
 
@@ -199,8 +204,26 @@ def decisionTreeClassifier(all_data,data_to_analyze,columns,test_values,predicte
     # ================================================================================
 
 
-def neuralNetworks():
-    print()
+def neuralNetworks(all_data,data_to_analyze,columns,test_values,predicted_values):
+    all_features=[]
+    le=preprocessing.LabelEncoder()
+    for column in columns:
+        if column!=data_to_analyze:
+            temp=all_data[column].tolist()
+            temp2=le.fit_transform(temp)
+            all_features.append(temp2)
+    testing=le.fit_transform(test_values)
+    x_train,x_test,y_train,y_test=train_test_split(all_features,testing)
+    scaler=StandardScaler()
+    scaler.fit(x_train)
+    x_train=scaler.transform(x_train)
+    x_test=scaler.transform(x_test)
+    mlp=MLPClassifier(hidden_layer_sizes=(10,10,10),max_iter=500, alpha=0.0001,solver='adam',random_state=21,tol=0.0000000001)
+    mlp.fit(x_train,y_train)
+    predictions=mlp.predict(x_test)
+    #st.write(classification_report(y_test,predictions))
+    st.write(predictions)
+
 
 
     
@@ -277,6 +300,18 @@ if uploaded_file:
                 decisionTreeClassifier(df,options_in_x,keys.columns,test_values,values)
         elif(option=='neural networks'):
             st.markdown("### Neural Networks")
+            for column_name in keys.columns:
+                parameters_of_x.append(column_name)
+                parameters_of_y.append(column_name)
+            options_in_x = st.selectbox(
+                '¿What attribute will be taken in to analyze?',parameters_of_x)
+            values = st.text_input('Write the predicted values separated by commas.', 'Ex. 2,4,5')
+            if (options_in_x!='None' and values !='Ex. 2,4,5' ):
+                test_values=df[options_in_x].tolist()
+                values=values.split(",")
+                le=preprocessing.LabelEncoder()
+                values=le.fit_transform(values)
+                neuralNetworks(df,options_in_x,keys.columns,test_values,values)
     if uploaded_file.type.find("json") != -1:
         df = pd.read_json(uploaded_file)
         st.markdown("### Dataset preview")
