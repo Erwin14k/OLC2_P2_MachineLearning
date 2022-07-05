@@ -255,8 +255,10 @@ if uploaded_file:
             if (options_in_x!='None' and values !='Ex. 2,4,5'):
                 test_values=df[options_in_x].tolist()
                 values=values.split(",")
-                for temp in values:
-                    temp=int(temp)
+                le=preprocessing.LabelEncoder()
+                values=le.fit_transform(values)
+                #for temp in values:
+                    #temp=int(temp)
                 gaussianClasiffier(df,options_in_x,keys.columns,test_values,values)
         elif(option=='Decision tree classifier'):
             st.markdown("### Decision Tree Classifier")
