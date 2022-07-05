@@ -25,7 +25,7 @@ st.set_page_config(
 
 st.write(
     """
-# 📊 OLC2 MACHINE LEARNING
+# 🤯 OLC2 MACHINE LEARNING
 I'm Erwin Vásquez - aka Erwin14k 👋
 """
 )
