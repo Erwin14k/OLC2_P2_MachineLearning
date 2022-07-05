@@ -219,7 +219,12 @@ def neuralNetworks(all_data,data_to_analyze,columns,test_values,predicted_values
     #x_train,x_test,y_train=train_test_split(all_features,testing)
     mlp=MLPClassifier(hidden_layer_sizes=(100,100,100),max_iter=1000, alpha=0.0001,solver='adam',random_state=21,tol=0.0000000001)
     mlp.fit(features,testing)
-    predictions=mlp.predict(testing)
+    final_values=[]
+    temp_list=[]
+    for temp in predicted_values:
+        temp_list.append(int(temp))
+    final_values.append(temp_list)
+    predictions=mlp.predict(final_values)
     #st.write(classification_report(y_test,predictions))
     st.write(predictions)
 
